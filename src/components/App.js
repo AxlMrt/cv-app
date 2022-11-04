@@ -4,6 +4,7 @@ import GlobalInfos from './cvForm/Global';
 import Educationnal from './cvForm/Educationnal';
 import Experience from './cvForm/Experience';
 import About from './cvForm/About';
+import Contact from './cvForm/Contact';
 
 function App() {
   const [global, setGlobal] = React.useState({
@@ -12,9 +13,20 @@ function App() {
     job: '',
   });
 
+  const [contact, setContact] = React.useState({
+    phone: '',
+    email: '',
+    address: {
+      number: '',
+      street: '',
+      postal: '',
+      city: '',
+    }
+  })
+
   const [about, setAbout] = React.useState({
     about: '',
-  });
+  })
 
   const [storeEduc, setStoreEduc] = React.useState([]);
   const [education, setEducation] = React.useState({
@@ -52,42 +64,60 @@ function App() {
     setAbout((current) => ({
       ...current,
       [name]: value,
-    }));
+    }))
+
+    setContact((current) => ({
+      ...current,
+      [name]: value,
+    }))
   }
 
   function handleEduc(event) {
     event.preventDefault();
     setStoreEduc((current) => [...current, education]);
-
+    
     Array.from(document.querySelectorAll('.educ')).forEach(
-      (input) => (input.value = '')
+      input => (input.value = '')
     );
-    setEducation({});
+    setEducation({})
   }
 
   function handleExp(event) {
     event.preventDefault();
     setStoreExp((current) => [...current, exp]);
     Array.from(document.querySelectorAll('.exp')).forEach(
-      (input) => (input.value = '')
+      input => (input.value = '')
     );
-    setExp({});
+    setExp({})
   }
 
   return (
     <main id="main">
       <form>
-        <div className="global">
+        <div className='global'>
           <h2>Info globale:</h2>
-          <GlobalInfos infos={global} change={handleChange} />
+          <GlobalInfos
+            infos={global}
+            change={handleChange}
+          />
         </div>
         <div>
           <h3>Description:</h3>
-          <About infos={about} change={handleChange} />
+          <About
+            infos={about}
+            change={handleChange}
+          />
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <Contact
+            infos={contact}
+            change={handleChange}
+          />
         </div>
         <div>
           <h2>Formation:</h2>
-          <Educationnal
+          <Educationnal 
             infos={education}
             change={handleChange}
             click={handleEduc}
@@ -95,19 +125,20 @@ function App() {
         </div>
         <div>
           <h2>Experience:</h2>
-          <Experience
+          <Experience 
             infos={exp}
             change={handleChange}
             click={handleExp}
           />
         </div>
       </form>
-      <div className="flex justify-center">
-        <CV
+      <div className='flex justify-center'>
+        <CV 
           global={global}
           education={storeEduc}
           experience={storeExp}
           about={about}
+          contact={contact}
         />
       </div>
     </main>

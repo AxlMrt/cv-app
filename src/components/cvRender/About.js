@@ -2,7 +2,7 @@ import React from 'react';
 
 function AboutRender({ about }) {
   return (
-    <div>
+    <div className='py-2'>
       <p>{about.about}</p>
     </div>
   );

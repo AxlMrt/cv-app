@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Experience({ infos, change, click }) {
-  const { enterprise, post, start, end } = infos;
+  const { enterprise, post, city, start, end } = infos;
   return (
     <div>
       <input
@@ -19,6 +19,14 @@ function Experience({ infos, change, click }) {
         value={post}
         onChange={change}
         placeholder="Poste occupé"
+      />
+      <input
+        className="exp"
+        type="text"
+        name="city"
+        value={city}
+        onChange={change}
+        placeholder="ville"
       />
       <span>de: </span>
       <input
