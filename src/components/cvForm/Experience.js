@@ -1,40 +1,44 @@
-import React from "react";
+import React from 'react';
 
-function Experience(props) {
-  const { enterprise, post, start, end } = props.infos
+function Experience({ infos, change, click }) {
+  const { enterprise, post, start, end } = infos;
   return (
     <div>
-      <input 
+      <input
+        className="exp"
         type="text"
         name="enterprise"
         value={enterprise}
-        onChange={props.change}
+        onChange={change}
         placeholder="Entreprise"
       />
-      <input 
+      <input
+        className="exp"
         type="text"
         name="post"
         value={post}
-        onChange={props.change}
+        onChange={change}
         placeholder="Poste occupé"
       />
       <span>de: </span>
       <input
+        className="exp"
         type="date"
-        name="start"
+        name="start1"
         value={start}
-        onChange={props.change}
+        onChange={change}
       />
       <span>à: </span>
       <input
+        className="exp"
         type="date"
-        name="end"
+        name="end1"
         value={end}
-        onChange={props.change}
+        onChange={change}
       />
-      <button>Ajouter</button>
+      <button onClick={click}>Ajouter</button>
     </div>
-  )
+  );
 }
 
 export default Experience;

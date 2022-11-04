@@ -1,38 +1,42 @@
-import React from "react";
+import React from 'react';
 
-function Educationnal(props) {
-  const { school, study, start, end } = props.infos
+function Educationnal({ infos, change, click }) {
+  const { school, study, start, end } = infos;
   return (
     <div>
-      <input 
+      <input
+        className="educ"
         type="text"
         name="school"
         value={school}
-        onChange={props.change}
+        onChange={change}
         placeholder="Ecole"
       />
-      <input 
+      <input
+        className="educ"
         type="text"
         name="study"
         value={study}
-        onChange={props.change}
+        onChange={change}
         placeholder="Etude"
       />
       <span>de: </span>
       <input
+        className="educ"
         type="date"
         name="start"
         value={start}
-        onChange={props.change}
+        onChange={change}
       />
       <span>à: </span>
       <input
+        className="educ"
         type="date"
         name="end"
         value={end}
-        onChange={props.change}
+        onChange={change}
       />
-      <button>Ajouter</button>
+      <button onClick={click}>Ajouter</button>
     </div>
   );
 }

@@ -1,18 +1,22 @@
 import React from 'react';
 import CV from './CV';
-import GlobalInfos from './cvForm/GlobalInfos';
+import GlobalInfos from './cvForm/Global';
 import Educationnal from './cvForm/Educationnal';
 import Experience from './cvForm/Experience';
+import About from './cvForm/About';
 
 function App() {
   const [global, setGlobal] = React.useState({
     firstName: '',
     lastName: '',
-    email: '',
-    phone: ''
+    job: '',
   });
 
-  const [storeEduc, setEduc] = React.useState([]);
+  const [about, setAbout] = React.useState({
+    about: '',
+  });
+
+  const [storeEduc, setStoreEduc] = React.useState([]);
   const [education, setEducation] = React.useState({
     school: '',
     study: '',
@@ -24,8 +28,8 @@ function App() {
   const [exp, setExp] = React.useState({
     enterprise: '',
     post: '',
-    start: '',
-    end: '',
+    start1: '',
+    end1: '',
   });
 
   function handleChange(event) {
@@ -44,41 +48,66 @@ function App() {
       ...current,
       [name]: value,
     }));
+
+    setAbout((current) => ({
+      ...current,
+      [name]: value,
+    }));
   }
 
-  function handleClick() {
-    setEduc((current) => [...current, education])
+  function handleEduc(event) {
+    event.preventDefault();
+    setStoreEduc((current) => [...current, education]);
+
+    Array.from(document.querySelectorAll('.educ')).forEach(
+      (input) => (input.value = '')
+    );
+    setEducation({});
+  }
+
+  function handleExp(event) {
+    event.preventDefault();
+    setStoreExp((current) => [...current, exp]);
+    Array.from(document.querySelectorAll('.exp')).forEach(
+      (input) => (input.value = '')
+    );
+    setExp({});
   }
 
   return (
     <main id="main">
       <form>
-        <div className='global'>
+        <div className="global">
           <h2>Info globale:</h2>
-          <GlobalInfos 
-            infos={global}
-            change={handleChange}
-          />
+          <GlobalInfos infos={global} change={handleChange} />
+        </div>
+        <div>
+          <h3>Description:</h3>
+          <About infos={about} change={handleChange} />
         </div>
         <div>
           <h2>Formation:</h2>
-          <Educationnal 
+          <Educationnal
             infos={education}
             change={handleChange}
+            click={handleEduc}
           />
         </div>
         <div>
           <h2>Experience:</h2>
-          <Experience 
+          <Experience
             infos={exp}
             change={handleChange}
+            click={handleExp}
           />
         </div>
       </form>
-      <div className='render'>
-        <CV 
+      <div className="flex justify-center">
+        <CV
           global={global}
           education={storeEduc}
+          experience={storeExp}
+          about={about}
         />
       </div>
     </main>
